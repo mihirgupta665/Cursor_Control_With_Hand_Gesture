@@ -80,6 +80,7 @@ while True:
             pyautogui.moveTo(screen_x, screen_y, duration=0.05)
             prev_screen_x, prev_screen_y = screen_x, screen_y
 
+        # Scrolling
         if sum(fingers)==4:
             scroll_mode=True
         else:
@@ -92,6 +93,15 @@ while True:
             elif index_tip.y>0.6:
                 pyautogui.scroll(-120)
                 cv2.putText(frame, "Scroll Down", (10,90), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
+
+        
+        #ScreenShot
+        if(sum(fingers) == 0):
+            current_time=time.time()
+            if current_time-last_screenshot_time>screenshot_cooldown:
+                pyautogui.screenshot(f"screenshots/screenshot_{int(current_time)}.png")
+                cv2.putText(frame, "ScreenShot Taken!", (10,130), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,0), 2)
+                last_screenshot_time=current_time
 
 
             
