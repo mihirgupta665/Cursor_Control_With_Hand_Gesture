@@ -16,6 +16,8 @@ click_times=[]
 click_cooldown=0.5
 scroll_mode=False
 freeze_cursor=False
+screenshot_cooldown=2
+last_screenshot_time=0
 
 screen_w,screen_h = pyautogui.size()
 print("\n hand mouse control.")
@@ -77,6 +79,20 @@ while True:
             screen_y = int(index_tip.y * screen_h)
             pyautogui.moveTo(screen_x, screen_y, duration=0.05)
             prev_screen_x, prev_screen_y = screen_x, screen_y
+
+        if sum(fingers)==4:
+            scroll_mode=True
+        else:
+            scroll_mode=False
+
+        if scroll_mode:
+            if index_tip.y<0.4:
+                pyautogui.scroll(120)
+                cv2.putText(frame, "Scroll Up", (10,90), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2)
+            elif index_tip.y>0.6:
+                pyautogui.scroll(-120)
+                cv2.putText(frame, "Scroll Down", (10,90), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
+
 
             
 
