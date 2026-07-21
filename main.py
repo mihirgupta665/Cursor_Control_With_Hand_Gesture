@@ -66,7 +66,17 @@ while True:
                     pyautogui.click()
                     cv2.putText(frame, "Single Click", (10,50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,0), 2)
 
-        
+        else:
+            if freeze_cursor:
+                time.sleep(0.1)
+            freeze_cursor=False 
+
+        # move cursor wrt index finger
+        if not freeze_cursor:
+            screen_x = int(index_tip.x * screen_w)
+            screen_y = int(index_tip.y * screen_h)
+            pyautogui.moveTo(screen_x, screen_y, duration=0.05)
+            prev_screen_x, prev_screen_y = screen_x, screen_y
 
             
 
