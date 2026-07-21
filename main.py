@@ -4,10 +4,12 @@ import pyautogui
 import time
 import math
 
+# initialize mediapipe hands
 mp_hands = mp.solutions.hands
 mp_drawing= mp.solutions.drawing_utils
 hands=mp_hands.Hands(max_num_hands=1, min_detection_confidence=0.7)
 
+# start webcam
 cap = cv2.VideoCapture(0)
 
 #gesture time control
@@ -20,7 +22,7 @@ screenshot_cooldown=2
 last_screenshot_time=0
 
 screen_w,screen_h = pyautogui.size()
-print("\n hand mouse control.")
+print("\n Smart Hand Control System")
 prev_screen_x, prev_screen_y = 0,0
 
 if not cap.isOpened():
